@@ -67,13 +67,3 @@ pub fn version() -> String {
         UNICODE_VERSION.0, UNICODE_VERSION.1, UNICODE_VERSION.2
     )
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn segment_table_works() {
-        assert_eq!(segment_table("👨‍👩‍👦".to_string()), "<table class=\"segmented\"><tr><th>Graphemes</th><td colspan=\"18\">👨\u{200d}👩\u{200d}👦</tr></tr><tr><th>Characters</th><td colspan=\"4\">👨</tr><td colspan=\"3\">\u{200d}</tr><td colspan=\"4\">👩</tr><td colspan=\"3\">\u{200d}</tr><td colspan=\"4\">👦</tr></tr><tr><th>Bytes</th><td>f0</tr><td>9f</tr><td>91</tr><td>a8</tr><td>e2</tr><td>80</tr><td>8d</tr><td>f0</tr><td>9f</tr><td>91</tr><td>a9</tr><td>e2</tr><td>80</tr><td>8d</tr><td>f0</tr><td>9f</tr><td>91</tr><td>a6</tr></tr></table>".to_string());
-    }
-}
