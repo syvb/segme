@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: Apache-2.0
 use unicode_segmentation::{UnicodeSegmentation, UNICODE_VERSION};
 use wasm_bindgen::prelude::*;
 
@@ -63,7 +64,7 @@ pub fn segment_table(t: String) -> String {
 #[wasm_bindgen]
 pub fn version() -> String {
     format!(
-        r#"<div class="ver">Unicode version {}.{}.{}, using <a href="https://github.com/unicode-rs/unicode-segmentation">unicode-segmentation</a> and <a href="https://github.com/ProgVal/unicode_names2">unicode_names2</a>.</div>"#,
+        include_str!("version.html"),
         UNICODE_VERSION.0, UNICODE_VERSION.1, UNICODE_VERSION.2
     )
 }
