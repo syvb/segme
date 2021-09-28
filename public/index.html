@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Segme</title>
+        <script src="../pkg/segme.js"></script>
+        <script>
+            let prom = wasm_bindgen("/pkg/segme_bg.wasm");
+            window.addEventListener("load", function() {
+                document.getElementById("seg").addEventListener("click", async function() {
+                    await prom;
+                    const table = wasm_bindgen.segment_table(document.getElementById("input").value);
+                    document.getElementById("table-holder").innerHTML = table;
+                });
+            });
+        </script>
+        <style>
+            td {
+                width: 2rem;
+                height: 2rem;
+                border: 2px solid black;
+            }
+            .segmented {
+                border-spacing: 0;
+                border-collapse: collapse;
+            }
+            .segmented td {
+                text-align: center;
+            }
+            .segmented .bytes-row > td {
+                font-family: monospace;
+            }
+        </style>
+    </head>
+    <body>
+        <input type="text" placeholder="Text" id="input" value="👨‍👩‍👦" />
+        <button id="seg">Segment</button>
+        <div id="table-holder"></div>
+    </body>
+</html>
