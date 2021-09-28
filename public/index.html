@@ -9,9 +9,19 @@
         <script>
             let prom = wasm_bindgen("/pkg/segme_bg.wasm");
             window.addEventListener("load", function() {
+                function handleHashChange() {
+                    if (location.hash.length > 1) {
+                        document.getElementById("input").value = decodeURIComponent(location.hash.slice(1));
+                        update();
+                    }
+                }
+                window.addEventListener("hashchange", handleHashChange);
+                handleHashChange();
                 async function update() {
+                    const val = document.getElementById("input").value;
+                    location.hash = "#" + val;
                     await prom;
-                    const table = wasm_bindgen.segment_table(document.getElementById("input").value);
+                    const table = wasm_bindgen.segment_table(val);
                     document.getElementById("table-holder").innerHTML = table;
                 }
                 document.getElementById("input").addEventListener("change", update);
