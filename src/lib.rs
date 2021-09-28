@@ -27,7 +27,7 @@ pub fn html_escape(text: &str) -> String {
 
 #[wasm_bindgen]
 pub fn segment_table(t: String) -> String {
-    let mut rows = String::from("<tr><th>Graphemes</th>");
+    let mut rows = String::from("<tr><th>Grapheme clusters</th>");
     for grapheme in t.graphemes(true) {
         rows.push_str(&format!(
             r#"<td colspan="{}"><span class="char">{}</span></td>"#,
@@ -35,20 +35,24 @@ pub fn segment_table(t: String) -> String {
             grapheme
         ));
     }
-    rows.push_str("</tr><tr><th>Characters</th>");
+    rows.push_str("</tr><tr><th>Code points</th>");
     for khar in t.chars() {
         rows.push_str(&format!(
             r#"<td colspan="{}"><span class="char">{}</span><div class="name">{}</div></td>"#,
             khar.len_utf8(),
             khar,
-            if let Some(x) = unicode_names2::name(khar) {
-                format!("{}", x)
+            if khar.is_ascii_alphanumeric() {
+                String::new()
             } else {
-                String::from("?")
+                if let Some(x) = unicode_names2::name(khar) {
+                    format!("{}", x)
+                } else {
+                    String::from("?")
+                }
             }
         ));
     }
-    rows.push_str(r#"</tr><tr class="bytes-row"><th>Bytes</th>"#);
+    rows.push_str(r#"</tr><tr class="bytes-row"><th>UTF-8 bytes</th>"#);
     for byte in t.bytes() {
         rows.push_str(&format!(r#"<td>{:x}</td>"#, byte));
     }
