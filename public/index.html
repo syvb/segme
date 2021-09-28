@@ -9,11 +9,14 @@
         <script>
             let prom = wasm_bindgen("/pkg/segme_bg.wasm");
             window.addEventListener("load", function() {
-                document.getElementById("seg").addEventListener("click", async function() {
+                async function update() {
                     await prom;
                     const table = wasm_bindgen.segment_table(document.getElementById("input").value);
                     document.getElementById("table-holder").innerHTML = table;
-                });
+                }
+                document.getElementById("input").addEventListener("change", update);
+                document.getElementById("input").addEventListener("input", update);
+                update();
             });
         </script>
         <style>
@@ -37,7 +40,6 @@
     </head>
     <body>
         <input type="text" placeholder="Text" id="input" value="👨‍👩‍👦" />
-        <button id="seg">Segment</button>
         <div id="table-holder"></div>
     </body>
 </html>
