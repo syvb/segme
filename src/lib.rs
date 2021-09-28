@@ -1,4 +1,4 @@
-use unicode_segmentation::UnicodeSegmentation;
+use unicode_segmentation::{UnicodeSegmentation, UNICODE_VERSION};
 use wasm_bindgen::prelude::*;
 
 pub fn entity_escape_char(khar: &char) -> String {
@@ -57,7 +57,10 @@ pub fn segment_table(t: String) -> String {
         rows.push_str(&format!(r#"<td>{:x}</td>"#, byte));
     }
     rows.push_str("</tr>");
-    format!(r#"<table class="segmented">{}</table>"#, rows)
+    format!(
+        r#"<table class="segmented">{}</table><div class="ver">using Unicode version {}.{}.{}</div>"#,
+        rows, UNICODE_VERSION.0, UNICODE_VERSION.1, UNICODE_VERSION.2
+    )
 }
 
 #[cfg(test)]
