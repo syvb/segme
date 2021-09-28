@@ -57,9 +57,14 @@ pub fn segment_table(t: String) -> String {
         rows.push_str(&format!(r#"<td>{:x}</td>"#, byte));
     }
     rows.push_str("</tr>");
+    format!(r#"<table class="segmented">{}</table>"#, rows,)
+}
+
+#[wasm_bindgen]
+pub fn version() -> String {
     format!(
-        r#"<table class="segmented">{}</table><div class="ver">using Unicode version {}.{}.{}</div>"#,
-        rows, UNICODE_VERSION.0, UNICODE_VERSION.1, UNICODE_VERSION.2
+        r#"<div class="ver">using Unicode version {}.{}.{}</div>"#,
+        UNICODE_VERSION.0, UNICODE_VERSION.1, UNICODE_VERSION.2
     )
 }
 

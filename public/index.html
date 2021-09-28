@@ -8,7 +8,7 @@
         <script src="../pkg/segme.js"></script>
         <script>
             let prom = wasm_bindgen("/pkg/segme_bg.wasm");
-            window.addEventListener("load", function() {
+            window.addEventListener("load", async function() {
                 function handleHashChange() {
                     if (location.hash.length > 1) {
                         document.getElementById("input").value = decodeURIComponent(location.hash.slice(1));
@@ -27,6 +27,8 @@
                 document.getElementById("input").addEventListener("change", update);
                 document.getElementById("input").addEventListener("input", update);
                 update();
+                await prom;
+                document.getElementById("ver-holder").innerHTML = wasm_bindgen.version();
             });
         </script>
         <style>
@@ -66,12 +68,21 @@
                 font-size: 0.65em;
             }
             .ver {
-                margin-top: 2rem;
+                margin-top: 1rem;
+                color: rgb(51, 51, 51);
+            }
+            .info {
+                margin-top: 1rem;
+                max-width: 50rem;
             }
         </style>
     </head>
     <body>
         <input type="text" placeholder="Text" id="input" value="👨‍👩‍👦" />
         <div id="table-holder"></div>
+        <div class="info">
+            Ever wondered what <a href="#👨‍👩‍👦">your favourite emoji</a> looked like at the byte level? Or perhaps wondered how <a href="#🇨🇦">flags</a> <a href="#🏳️‍🌈">are</a> <a href="#🏴󠁧󠁢󠁳󠁣󠁴󠁿">encoded</a>?</a> Maybe <a href="#नमस्कार!">Hindi text</a> is more your thing? Well you find the answers to all of those questions with this web app.
+        </div>
+        <div id="ver-holder"></div>
     </body>
 </html>
