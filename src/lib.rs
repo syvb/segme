@@ -30,7 +30,7 @@ pub fn segment_table(t: String) -> String {
     let mut rows = String::from("<tr><th>Graphemes</th>");
     for grapheme in t.graphemes(true) {
         rows.push_str(&format!(
-            r#"<td colspan="{}">{}</td>"#,
+            r#"<td colspan="{}"><span class="char">{}</span></td>"#,
             grapheme.len(),
             grapheme
         ));
@@ -38,9 +38,14 @@ pub fn segment_table(t: String) -> String {
     rows.push_str("</tr><tr><th>Characters</th>");
     for khar in t.chars() {
         rows.push_str(&format!(
-            r#"<td colspan="{}">{}</td>"#,
+            r#"<td colspan="{}"><span class="char">{}</span><div class="name">{}</div></td>"#,
             khar.len_utf8(),
-            khar
+            khar,
+            if let Some(x) = unicode_names2::name(khar) {
+                format!("{}", x)
+            } else {
+                String::from("?")
+            }
         ));
     }
     rows.push_str(r#"</tr><tr class="bytes-row"><th>Bytes</th>"#);
