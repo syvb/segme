@@ -6,9 +6,9 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Segme</title>
-        <script src="../pkg/segme.js"></script>
+        <script src="pkg/segme.js"></script>
         <script>
-            let prom = wasm_bindgen("/pkg/segme_bg.wasm");
+            let prom = wasm_bindgen("pkg/segme_bg.wasm");
             window.addEventListener("load", async function() {
                 function handleHashChange() {
                     if (location.hash.length > 1) {
