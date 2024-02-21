@@ -54,6 +54,7 @@
                 border-spacing: 0;
                 border-collapse: collapse;
                 font-size: 1.5rem;
+                width: min-content;
             }
             .segmented td {
                 text-align: center;
@@ -74,6 +75,9 @@
             .info {
                 margin-top: 1rem;
                 max-width: 50rem;
+            }
+            ul {
+                margin: 0;
             }
         </style>
         <meta name="description" content="Utility for segmenting Unicode text online.">
@@ -102,7 +106,14 @@
         <input type="text" placeholder="Text" id="input" value="👨‍👩‍👦" />
         <div id="table-holder">Loading</div>
         <div class="info">
-            <p>Ever wondered what <a href="#👨‍👩‍👦">your favourite emoji</a> looked like at the byte level? Or perhaps wondered how <a href="#🇨🇦">flags</a> <a href="#🏳️‍🌈">are</a> <a href="#🏴󠁧󠁢󠁳󠁣󠁴󠁿">encoded</a>?</a> Maybe <a href="#नमस्कार!">Hindi text</a> is more your thing? Well you find the answers to all of those questions with this web app.</p>
+            Examples:
+            <ul>
+                <li><a href="#👨‍👩‍👦">Family emoji: 👨‍👩‍👦</a></li>
+                <li><a href="#🇨🇦">Country flag: 🇨🇦</a></li>
+                <li><a href="#🏴󠁧󠁢󠁳󠁣󠁴󠁿">Region flag: 🏴󠁧󠁢󠁳󠁣󠁴󠁿</a></li>
+                <li><a href="#🏳️‍🌈">Zero-width-joiner flag: 🏳️‍🌈</a></li>
+                <li><a href="#नमस्कार!">Hindi: नमस्कार!</a></li>
+            </ul>
             <p>Segmentation is done according to <a href="https://unicode.org/reports/tr29/">UAX #29</a> rules.</p>
         </div>
         <div id="ver-holder"></div>
